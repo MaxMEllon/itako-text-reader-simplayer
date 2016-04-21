@@ -31,6 +31,12 @@ export default class TextReaderSimplayer {
     };
   }
 
+  /**
+   * @method read
+   * @param {token} - if toke.type is 'text', read as text;
+   * @param {object} [options] - itako specify transformer options(undefined)
+   * @returns {object|promise<undefined>} result - if the plugin read the token, it return the Promise
+   */
   read(token) {
     const fileName = `${TextReaderSimplayer._randomString}.wav`;
     return new Promise ((resolve) => {

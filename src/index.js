@@ -6,7 +6,14 @@ import VoiceText from 'voicetext';
 
 // @class TextReaderSimplayer
 export default class TextReaderSimplayer {
+  static get notExistApiKey() {
+    return process.env.API_KEY === '' || process.env.API_KEY == null;
+  }
+
   static get API_KEY() {
+    if (TextReaderSimplayer.notExistApiKey) {
+      throw new Error('You must execute `$ export API_KEY=XXXXXXXXXXXXX`');
+    }
     return process.env.API_KEY;
   }
 
@@ -24,9 +31,9 @@ export default class TextReaderSimplayer {
     this.voice = new VoiceText(TextReaderSimplayer.API_KEY);
     this.readType = type;
     this.opts = {
-      volume: 1,
-      pitch: 1,
-      speed: 1,
+      volume: 100,
+      pitch: 100,
+      speed: 100,
       ...options,
     };
   }
@@ -39,18 +46,21 @@ export default class TextReaderSimplayer {
    */
   read(token) {
     const fileName = `${TextReaderSimplayer._randomString}.wav`;
-    return new Promise ((resolve) => {
+    return new Promise((resolve) => {
       this.voice
-        .speaker(this.voice.SPEAKER.HIKARI)
-        .speak('greeting', (err, buf) => {
-          if (err) throw err;
-          fs.writeFile(fileName, buf, 'binary', (err) => {
-            if (err) throw err;
-            play(fileName).then((result) => {
-              fs.unlink(fileName, () => resolve());
-            });
+      .speaker(this.voice.SPEAKER.HIKARI)
+      .volume(this.opts.volume)
+      .speed(this.opts.speed)
+      .pitch(this.opts.pitch)
+      .speak(token.value, (fetchError, buf) => {
+        if (fetchError) throw fetchError;
+        fs.writeFile(fileName, buf, 'binary', (writeError) => {
+          if (writeError) throw writeError;
+          play(fileName).then(() => {
+            fs.unlink(fileName, () => resolve());
           });
         });
+      });
     });
   }
 }

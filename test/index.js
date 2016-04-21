@@ -7,9 +7,9 @@ import ItakoTextReaderSimplayer from '../src/index';
 // specs
 describe('ItakoTextReaderSimplayer', () => {
   it('', done => {
-    let itako = new ItakoTextReaderSimplayer('text');
+    const itako = new ItakoTextReaderSimplayer('text');
     itako.read({
-      type: 'text'
+      value: 'わこつ',
     }).then(() => {
       done();
     });

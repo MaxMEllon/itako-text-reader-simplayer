@@ -1,2 +1,2 @@
 --require babel-register
--t 150000
+-t 10000

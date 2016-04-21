@@ -6,12 +6,10 @@ import ItakoTextReaderSimplayer from '../src/index';
 
 // specs
 describe('ItakoTextReaderSimplayer', () => {
-  it('', done => {
+  it('', async () => {
     const itako = new ItakoTextReaderSimplayer('text');
-    itako.read({
+    await itako.read({
       value: 'わこつ',
-    }).then(() => {
-      done();
     });
   });
 });

@@ -2,11 +2,16 @@
 import assert from 'assert';
 
 // target
-import yourModuleName from '../src';
+import ItakoTextReaderSimplayer from '../src/index';
 
 // specs
-describe('yourModuleName', () => {
-  it('spec1', () => {
-    assert.deepStrictEqual(yourModuleName(), { foo: null });
+describe('ItakoTextReaderSimplayer', () => {
+  it('', done => {
+    let itako = new ItakoTextReaderSimplayer('text');
+    itako.read({
+      type: 'text'
+    }).then(() => {
+      done();
+    });
   });
 });

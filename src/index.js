@@ -1,6 +1,7 @@
 // dpendencies
 import fs from 'fs';
 import play from 'simplayer-promise';
+import Promise from 'bluebird';
 import VoiceText from 'voicetext';
 
 // @class TextReaderSimplayer

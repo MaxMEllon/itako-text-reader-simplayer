@@ -1,6 +1,7 @@
 {
-  "name": "your-module-name",
+  "name": "itako-text-reader-simplayer",
   "main": "lib",
+  "version": "v0.0.1-alpha",
   "files": [
     "lib"
   ],

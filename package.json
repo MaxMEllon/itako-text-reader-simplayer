@@ -1,7 +1,11 @@
 {
   "name": "itako-text-reader-simplayer",
   "main": "lib",
-  "version": "v0.0.2-alpha",
+  "bin": {
+    "itk": "./bin/cli.js",
+    "itako-text-reader-simplayer": "./bin/cli.js"
+  },
+  "version": "v0.0.3-alpha",
   "files": [
     "lib"
   ],

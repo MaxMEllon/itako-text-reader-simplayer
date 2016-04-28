@@ -17,8 +17,12 @@ export default class TextReaderSimplayer {
     return process.env.API_KEY;
   }
 
-  static get _randomString() {
-    return Math.random().toString(36).slice(-8);
+  static get createFileName() {
+    let tempDirectory = '/tmp/';
+    if (process.platform === 'win32') {
+      tempDirectory = 'c:\\Temp\\';
+    }
+    return `${tempDirectory}${Math.random().toString(36).slice(-8)}.wav`;
   }
 
   /**
@@ -45,7 +49,7 @@ export default class TextReaderSimplayer {
    * @returns {object|promise<undefined>} result - if the plugin read the token, it return the Promise
    */
   read(token) {
-    const fileName = `${TextReaderSimplayer._randomString}.wav`;
+    const fileName = TextReaderSimplayer.createFileName;
     return new Promise((resolve) => {
       this.voice
       .speaker(this.voice.SPEAKER.HIKARI)

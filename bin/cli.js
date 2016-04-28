@@ -2,8 +2,8 @@
 'use strict';
 
 var spawn = require('child_process').spawn;
-var join = require('path').join;
 var ItakoTextReaderSimplayer = require('../lib/index');
+var Promise = require('bluebird');
 
 var itako = new ItakoTextReaderSimplayer('text');
 
@@ -17,15 +17,17 @@ if (process.argv.length == 2) {
     process.stdin, process.stdout
   );
 
+  var promises = [];
   rl.on('line', (line) => {
     token = { value: line };
-    itako.read(token);
-  })
+    promises.push(itako.read(token));
+  });
+  Promise.race(promises).then(() => {});
 
 } else {
   token = {
     value: process.argv.slice(2).join().toString()
   };
-  itako.read(token);
+  itako.read(token).then(() => {});
 }
 
